@@ -25,4 +25,3 @@ The following topics will be studied:
 20. LSP
 21. ISP
 22. DIP
-23. 
