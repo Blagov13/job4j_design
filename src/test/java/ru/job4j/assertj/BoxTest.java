@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 class BoxTest {
     @Test
     void isThisSphere() {
-        Box box = new Box(0, 10);
+        Box box = new Box(0, 11);
         String name = box.whatsThis();
         assertThat(name).isEqualTo("Sphere");
     }
