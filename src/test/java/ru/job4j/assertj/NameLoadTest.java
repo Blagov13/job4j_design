@@ -45,4 +45,12 @@ class NameLoadTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(String.format("this name: %s does not contain a value", name1));
     }
+
+    @Test
+    void checkNamesArrayIsEmpty() {
+        NameLoad nameLoad = new NameLoad();
+        assertThatThrownBy(nameLoad::parse)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Names array is empty");
+    }
 }
