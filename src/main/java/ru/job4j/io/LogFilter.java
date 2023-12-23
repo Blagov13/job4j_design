@@ -23,14 +23,8 @@ public class LogFilter {
 
     public void saveTo(String out) {
         var data = filter();
-        try (Writer printWriter = new PrintWriter(
-                new BufferedOutputStream(
-                        new FileOutputStream(out)
-                ))) {
-            for (String o : data) {
-                printWriter.write(o);
-                printWriter.write(System.lineSeparator());
-            }
+        try (PrintWriter writer = new PrintWriter(new BufferedOutputStream(new FileOutputStream(out)))) {
+            data.forEach(writer::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
