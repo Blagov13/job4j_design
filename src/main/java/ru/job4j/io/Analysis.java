@@ -2,6 +2,8 @@ package ru.job4j.io;
 
 import java.io.*;
 
+import static java.lang.System.lineSeparator;
+
 public class Analysis {
     public void unavailable(String source, String target) {
         boolean time = true;
@@ -11,7 +13,8 @@ public class Analysis {
                 String line = read.readLine();
                 if (time == (line.startsWith("400") || line.startsWith("500"))) {
                     time = !time;
-                    out.println(line.substring(4));
+                    out.append(line.substring(4)).append(";")
+                            .append(time ? lineSeparator() : "");
                 }
             }
         } catch (IOException e) {
