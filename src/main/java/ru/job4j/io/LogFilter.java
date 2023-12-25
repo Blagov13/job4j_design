@@ -25,7 +25,7 @@ public class LogFilter {
         var data = filter();
         try (PrintWriter writer = new PrintWriter(new BufferedOutputStream(new FileOutputStream(out)))) {
             data.forEach(writer::println);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
