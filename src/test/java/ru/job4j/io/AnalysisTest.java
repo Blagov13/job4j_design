@@ -28,7 +28,7 @@ class AnalysisTest {
         try (BufferedReader in = new BufferedReader(new FileReader(target1))) {
             in.lines().forEach(rsl::append);
         }
-        assertThat("10:57:0111:02:02").hasToString(rsl.toString());
+        assertThat("10:57:01;11:02:02;").hasToString(rsl.toString());
     }
 
 }
