@@ -7,6 +7,9 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
+        if (args.length < 2) {
+            throw new IndexOutOfBoundsException();
+        }
         validation(args[0], args[1]);
         Path start = Paths.get(args[0]);
         search(start, path -> path.toFile().getName().endsWith(args[1])).forEach(System.out::println);
