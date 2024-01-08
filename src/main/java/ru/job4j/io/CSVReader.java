@@ -10,7 +10,7 @@ public class CSVReader {
         String[] filters = argsName.get("filter").split(",");
         List<Integer> csv = new ArrayList<>();
         try (FileInputStream fileInputStream = new FileInputStream(argsName.get("path"));
-        Scanner scanner = new Scanner(fileInputStream);
+             Scanner scanner = new Scanner(fileInputStream);
              PrintWriter writer = new PrintWriter(new FileWriter(argsName.get("out")))) {
             if (scanner.hasNextLine()) {
                 String firstLine = scanner.nextLine();
@@ -45,11 +45,23 @@ public class CSVReader {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void validation(String[] args, ArgsName allArgs) {
         if (args.length != 4) {
             throw new IllegalArgumentException();
         }
+        File directory = new File(allArgs.get("path"));
+        if (!directory.exists() && !directory.isDirectory()) {
+            throw new IllegalArgumentException();
+        }
+        if (!(allArgs.get("delimiter").length() == 1) || !",".equals(allArgs.get("delimiter"))) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+
         ArgsName argsName = ArgsName.of(args);
+        validation(args, argsName);
         handle(argsName);
     }
 }
