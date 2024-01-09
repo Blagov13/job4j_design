@@ -17,12 +17,12 @@ public class Auto {
 
     @Override
     public String toString() {
-        return "Auto{" +
-                "sale=" + sale +
-                ", dateOfManufacture=" + dateOfManufacture +
-                ", number=" + number +
-                ", color=" + Arrays.toString(color) +
-                '}';
+        return "Auto{"
+                + "sale=" + sale
+                + ", dateOfManufacture=" + dateOfManufacture
+                + ", number=" + number
+                + ", color=" + Arrays.toString(color)
+                + '}';
     }
 }
 

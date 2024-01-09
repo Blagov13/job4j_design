@@ -9,8 +9,8 @@ public class Number {
 
     @Override
     public String toString() {
-        return "Number{" +
-                "serialNumber='" + serialNumber + '\'' +
-                '}';
+        return "Number{"
+                + "serialNumber='" + serialNumber + '\''
+                + '}';
     }
 }
