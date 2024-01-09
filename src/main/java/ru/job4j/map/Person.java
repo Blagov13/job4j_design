@@ -55,9 +55,20 @@ public class Person {
         persons.put(aleks, 1);
         persons.put(daria, 2);
         persons.put(vova, 3);
+        TreeSet<Integer> set = new TreeSet<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return 0;
+            }
+        });
+        set.add(1);
+        set.add(2);
+        set.add(1);
+        System.out.println(set);
         for (int i = 0; i < 10; i++) {
             System.out.println(persons.get(new Person("Aleksandr", 9889)));
         }
     }
+
 }
 
