@@ -16,7 +16,8 @@ public class Auto {
     private Number number;
     private String[] color;
 
-    public Auto() {}
+    public Auto() {
+    }
 
     public Auto(boolean sale, int dateOfManufacture, Number number, String[] color) {
         this.sale = sale;

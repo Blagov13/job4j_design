@@ -6,7 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Number {
     private String serialNumber;
 
-    public Number(){}
+    public Number() {
+    }
 
     public Number(String serialNumber) {
         this.serialNumber = serialNumber;
