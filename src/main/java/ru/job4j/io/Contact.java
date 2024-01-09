@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 
 public record Contact(int zipCode, String phone) implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
 
