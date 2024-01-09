@@ -16,6 +16,38 @@ public class Auto {
     private Number number;
     private String[] color;
 
+    public boolean isSale() {
+        return sale;
+    }
+
+    public void setSale(boolean sale) {
+        this.sale = sale;
+    }
+
+    public int getDateOfManufacture() {
+        return dateOfManufacture;
+    }
+
+    public void setDateOfManufacture(int dateOfManufacture) {
+        this.dateOfManufacture = dateOfManufacture;
+    }
+
+    public Number getNumber() {
+        return number;
+    }
+
+    public void setNumber(Number number) {
+        this.number = number;
+    }
+
+    public String[] getColor() {
+        return color;
+    }
+
+    public void setColor(String[] color) {
+        this.color = color;
+    }
+
     public Auto() {
     }
 
