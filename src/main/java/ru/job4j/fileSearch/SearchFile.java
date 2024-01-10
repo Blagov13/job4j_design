@@ -3,22 +3,18 @@ package ru.job4j.fileSearch;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class SearchFile implements FileVisitor<Path> {
-    private String fileSearch;
-    private Path path;
-    private String type;
+    private final Predicate<Path> condition;
     private final List<Path> list;
 
-    public SearchFile(Path path, String type, String fileSearch) {
-        this.fileSearch = fileSearch;
-        this.path = path;
-        this.type = type;
+    public SearchFile(Predicate<Path> condition) {
+        this.condition = condition;
         this.list = new ArrayList<>();
     }
 
@@ -29,12 +25,7 @@ public class SearchFile implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-        if (type.equals("mask") && file.toFile().getName().matches(fileSearch
-                .replace(".", "[.]")
-                .replace("*", ".+")
-                .replace("?", "."))) {
-            list.add(file);
-        } else if (type.equals("mask") && file.toFile().getName().equals(fileSearch)) {
+        if (condition.test(file)) {
             list.add(file);
         }
         return FileVisitResult.CONTINUE;
@@ -48,10 +39,6 @@ public class SearchFile implements FileVisitor<Path> {
     @Override
     public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
         return FileVisitResult.CONTINUE;
-    }
-
-    public void of() throws IOException {
-        Files.walkFileTree(path, this);
     }
 
     public List<Path> getPaths() {
