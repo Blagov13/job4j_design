@@ -1,4 +1,4 @@
-package ru.job4j.fileSearch;
+package ru.job4j.search;
 
 import java.util.HashMap;
 import java.util.Map;
