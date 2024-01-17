@@ -22,7 +22,11 @@ select * from product where name like 'мороженое';
 
 select * from product where expiried_date < current_date;
 
-select max(price) from product;
+select p.product, max(t.price)
+from product p
+join type t
+on p.type_id = t.id
+group by p.product
 
 select t.name, count(*)
 from product p
