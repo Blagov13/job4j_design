@@ -31,6 +31,10 @@ public class Config {
         }
     }
 
+    public Map<String, String> getValues() {
+        return values;
+    }
+
     public String value(String key) {
         if (values.containsKey(key)) {
             return values.get(key);
