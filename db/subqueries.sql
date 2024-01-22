@@ -36,8 +36,8 @@ INSERT into orders (amount, customer_id) VALUES (0, 4);
 
 /*Запрашиваем список пользователей, которые еще не выполнили ни одного заказа*/
 SELECT * from customers
-WHERE customers.id in
-(SELECT customer_id from orders WHERE amount = 0);
+WHERE customers.id not in
+(SELECT customer_id from orders);
 
 
 
