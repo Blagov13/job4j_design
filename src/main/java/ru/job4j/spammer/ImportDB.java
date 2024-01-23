@@ -15,8 +15,8 @@ import java.util.Properties;
 import java.util.stream.Stream;
 
 public class ImportDB {
-    private Properties config;
-    private String dump;
+    private final Properties config;
+    private final String dump;
 
     public ImportDB(Properties config, String dump) {
         this.config = config;
@@ -66,7 +66,8 @@ public class ImportDB {
 
     public static void main(String[] args) throws Exception {
         Properties config = new Properties();
-        try (InputStream input = ImportDB.class.getClassLoader().getResourceAsStream("spammer.properties")) {
+        try (InputStream input = ImportDB.class.getClassLoader().getResourceAsStream(
+                "spammer.properties")) {
             config.load(input);
         }
         ImportDB dataBase = new ImportDB(config, "/Users/aleksandrblagov/job4j_design/data/dump.txt");
