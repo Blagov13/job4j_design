@@ -63,7 +63,6 @@ public class ImportDB {
         }
     }
 
-
     public static void main(String[] args) throws Exception {
         Properties config = new Properties();
         try (InputStream input = ImportDB.class.getClassLoader().getResourceAsStream(
