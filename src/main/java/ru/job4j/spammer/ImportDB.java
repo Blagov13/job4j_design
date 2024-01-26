@@ -23,14 +23,14 @@ public class ImportDB {
         this.dump = dump;
     }
 
-    public List<User> load() throws IOException {
+    public List<User> load() throws IllegalArgumentException, IOException {
         List<User> users = new ArrayList<>();
         try (Stream<String> lines = Files.lines(Paths.get(dump))) {
             lines.filter(line -> !line.isEmpty() && line.indexOf(";") != line.lastIndexOf(";")
                             && !line.equals(";;")
                             && StringUtils.split(line, ";").length <= 2)
                     .forEach(line -> users.add(new User(line.split(";")[0], line.split(";")[1])));
-        } catch (IOException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         return users;
