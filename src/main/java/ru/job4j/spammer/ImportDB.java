@@ -1,10 +1,6 @@
 package ru.job4j.spammer;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.stream.Stream;
 
 public class ImportDB {
     private final Properties config;
@@ -25,7 +20,19 @@ public class ImportDB {
 
     public List<User> load() throws IllegalArgumentException, IOException {
         List<User> users = new ArrayList<>();
-        try (Stream<String> lines = Files.lines(Paths.get(dump))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(dump))) {
+            String read;
+            while ((read = reader.readLine()) != null) {
+                String[] line = read.split(";");
+                if (line.length != 2 || line[1].startsWith(";")) {
+                    throw new IllegalArgumentException();
+                }
+                users.add(new User(line[0], line[1]));
+            }
+        }
+        return users;
+    }
+        /*try (Stream<String> lines = Files.lines(Paths.get(dump))) {
             lines.filter(line -> !line.isEmpty() && line.indexOf(";") != line.lastIndexOf(";")
                             && !line.equals(";;")
                             && StringUtils.split(line, ";").length <= 2)
@@ -33,8 +40,7 @@ public class ImportDB {
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
-        return users;
-    }
+        return users;*/
 
     public void save(List<User> users) throws ClassNotFoundException, SQLException {
         Class.forName(config.getProperty("jdbc.driver"));
