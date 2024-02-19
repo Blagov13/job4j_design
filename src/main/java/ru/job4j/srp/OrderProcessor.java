@@ -10,3 +10,4 @@ public class OrderProcessor {
     public void generateOrderReport(OrderProcessor orderProcessor) {
     }
 }
+

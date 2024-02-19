@@ -4,7 +4,6 @@ public class FitnessTrainer {
     /*
 Класс фитнес тренера, отвечает за хранение инфо о тренере, вычисление зп и отправке Email
 */
-
     private String name;
     private double salary;
     private String email;
