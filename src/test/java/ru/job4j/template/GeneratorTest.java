@@ -10,7 +10,6 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.*;
 
 class GeneratorTest {
-    //Проверка корректности замены
     @Test
     public void whenGivenValidTemplateAbdMapThenReplaceKeysWithValues() {
         Generator generator = new GeneratorTemplate();
@@ -23,7 +22,6 @@ class GeneratorTest {
         assertEquals(exp, rsl);
     }
 
-    //Проверка, если отсутствуют ключи, выбрасывает исключение
     @Test
     public void whenTemplateContainsMissingKeyThenThrowException() {
         Generator generator = new GeneratorTemplate();
@@ -34,7 +32,6 @@ class GeneratorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    //Проверка если неверный ключ, выбрасывает исключение
     @Test
     public void whenMapContainsExtraKeyThenThrowException() {
         Generator generator = new GeneratorTemplate();
