@@ -12,10 +12,10 @@ public class XMLFormatter {
     }
 
     public String formatEmployee(Employee employee) {
-        String formattedDate = "Hired: " + dateTimeParser.parse(employee.getHired()) +
-                ", Fired: " + dateTimeParser.parse(employee.getFired());
-        return "<Employee><Name>" + employee.getName() +
-                "</Name><Dates>" + formattedDate +
-                "</Dates><Salary>" + employee.getSalary() + "</Salary></Employee>";
+        String formattedDate = "Hired: " + dateTimeParser.parse(employee.getHired())
+                + ", Fired: " + dateTimeParser.parse(employee.getFired());
+        return "<Employee><Name>" + employee.getName()
+                + "</Name><Dates>" + formattedDate
+                + "</Dates><Salary>" + employee.getSalary() + "</Salary></Employee>";
     }
 }
