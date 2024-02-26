@@ -5,8 +5,10 @@ public class PaymentProcessor {
     платежа, нужно будет изменять метод processPayment*/
     public void processPayment(String paymentType) {
         if (paymentType.equals("CreditCard")) {
+            return;
             // обработка платежа по кредитной карте
         } else if (paymentType.equals("PayPal")) {
+            return;
             // обработка платежа через PayPal
         }
     }
