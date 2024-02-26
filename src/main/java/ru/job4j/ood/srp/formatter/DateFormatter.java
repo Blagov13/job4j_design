@@ -12,9 +12,9 @@ public class DateFormatter {
     }
 
     public String formatEmployee(Employee employee) {
-        return "Name: " + employee.getName() +
-                ", Hired: " + dateTimeParser.parse(employee.getHired()) +
-                ", Fired: " + dateTimeParser.parse(employee.getFired()) +
-                ", Salary: " + employee.getSalary();
+        return "Name: " + employee.getName()
+                + ", Hired: " + dateTimeParser.parse(employee.getHired())
+                + ", Fired: " + dateTimeParser.parse(employee.getFired())
+                + ", Salary: " + employee.getSalary();
     }
 }
