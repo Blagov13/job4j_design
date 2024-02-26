@@ -15,4 +15,3 @@ public class Square extends Rectangle {
         super.setWidth(height);
     }
 }
-

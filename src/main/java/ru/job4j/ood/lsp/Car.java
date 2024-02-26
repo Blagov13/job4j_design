@@ -8,4 +8,3 @@ public class Car extends Vehicle {
         return 120;
     }
 }
-
