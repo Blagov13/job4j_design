@@ -25,7 +25,7 @@ public class ControlQuality {
                 destination = getShop();
             } else if (shelfLifePercentage >= 75 && shelfLifePercentage < 100) {
                 destination = getShop();
-                product.setPrice(product.getPrice() * (1 - product.getDiscount())); // Применяем скидку
+                product.setPrice(product.getPrice() * (1 - product.getDiscount()));
             } else {
                 destination = getTrash();
             }
@@ -40,7 +40,6 @@ public class ControlQuality {
         return (double) remainingDays / totalDays * 100;
     }
 
-    // Фабричные методы для получения хранилищ
     private Store getWarehouse() {
         return stores.get(0);
     }
