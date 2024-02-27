@@ -1,21 +1,21 @@
 package ru.job4j.ood.srp.formatter;
 
-import ru.job4j.ood.srp.model.Employee;
-
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class XMLFormatter {
-    private final DateTimeParser<Calendar> dateTimeParser;
+public class XMLFormatter extends XmlAdapter<String, Calendar> {
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd:MM:yyyy HH:mm");
 
-    public XMLFormatter(DateTimeParser<Calendar> dateTimeParser) {
-        this.dateTimeParser = dateTimeParser;
+    @Override
+    public Calendar unmarshal(String xml) throws Exception {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DATE_FORMAT.parse(xml));
+        return calendar;
     }
 
-    public String formatEmployee(Employee employee) {
-        String formattedDate = "Hired: " + dateTimeParser.parse(employee.getHired())
-                + ", Fired: " + dateTimeParser.parse(employee.getFired());
-        return "<Employee><Name>" + employee.getName()
-                + "</Name><Dates>" + formattedDate
-                + "</Dates><Salary>" + employee.getSalary() + "</Salary></Employee>";
+    @Override
+    public String marshal(Calendar v) {
+        return DATE_FORMAT.format(v.getTime());
     }
 }

@@ -17,10 +17,15 @@ class JsonReportTest {
     void testGenerate() {
         Store store = new MemoryStore();
         DateTimeParser<Calendar> dateTimeParser = new ReportDateTimeParser();
-        store.add(new Employee("John Doe", Calendar.getInstance(), Calendar.getInstance(), 5000.0));
-        store.add(new Employee("Jane Smith", Calendar.getInstance(), Calendar.getInstance(), 6000.0));
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
         JsonReport jsonReport = new JsonReport(store, new DateFormatter(dateTimeParser));
-        String json = jsonReport.generate(employee -> true);
-        assertThat(json).contains("John Doe", "Jane Smith");
+        StringBuilder expect = new StringBuilder()
+                .append(String.format("{\"employees\":[{\"name\":\"%s\",", worker.getName()))
+                .append(String.format("\"hired\":\"%s\",", dateTimeParser.parse(worker.getHired())))
+                .append(String.format("\"fired\":\"%s\",", dateTimeParser.parse(worker.getFired())))
+                .append(String.format("\"salary\":%s}]}", worker.getSalary()));
+        assertThat(jsonReport.generate(employee -> true)).isEqualToIgnoringWhitespace(expect.toString());
     }
 }
