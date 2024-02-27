@@ -1,7 +1,7 @@
 package ru.job4j.ood.lsp.storage;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControlQuality {
@@ -11,33 +11,45 @@ public class ControlQuality {
         this.stores = stores;
     }
 
-    private int daysToExpirationPercentage(LocalDate createDate, LocalDate expiryDate, LocalDate now) {
-        long totalDays = createDate.until(expiryDate, ChronoUnit.DAYS);
-        long remainingDays = now.until(expiryDate, ChronoUnit.DAYS);
+    public void redistribute() {
+        List<Food> allProducts = new ArrayList<>();
+        stores.forEach(store -> allProducts.addAll(store.getProducts()));
 
-        return (int) ((double) remainingDays / totalDays * 100);
-    }
+        for (Food product : allProducts) {
+            double shelfLifePercentage = calculateShelfLifePercentage(product);
+            Store destination;
 
-    public void resort() {
-        for (Store store : stores) {
-            List<Food> products = store.getProducts();
-            for (Food product : products) {
-                int percentage = daysToExpirationPercentage(product.getCreateDate(), product.getExpiryDate(), LocalDate.now());
-                if (percentage < 25) {
-                    distributeToStore(new Warehouse(), product);
-                } else if (percentage >= 25 && percentage < 75) {
-                    distributeToStore(new Shop(), product);
-                } else if (percentage >= 75) {
-                    product.setPrice(product.getPrice() * (1 - product.getDiscount()));
-                    distributeToStore(new Shop(), product);
-                } else {
-                    distributeToStore(new Trash(), product);
-                }
+            if (shelfLifePercentage < 25) {
+                destination = getWarehouse();
+            } else if (shelfLifePercentage >= 25 && shelfLifePercentage < 75) {
+                destination = getShop();
+            } else if (shelfLifePercentage >= 75 && shelfLifePercentage < 100) {
+                destination = getShop();
+                product.setPrice(product.getPrice() * (1 - product.getDiscount())); // Применяем скидку
+            } else {
+                destination = getTrash();
             }
+
+            destination.addProduct(product);
         }
     }
 
-    private void distributeToStore(Store store, Food product) {
-        store.addProduct(product);
+    private double calculateShelfLifePercentage(Food product) {
+        long totalDays = product.getExpiryDate().toEpochDay() - product.getCreateDate().toEpochDay();
+        long remainingDays = product.getExpiryDate().toEpochDay() - LocalDate.now().toEpochDay();
+        return (double) remainingDays / totalDays * 100;
+    }
+
+    // Фабричные методы для получения хранилищ
+    private Store getWarehouse() {
+        return stores.get(0);
+    }
+
+    private Store getShop() {
+        return stores.get(1);
+    }
+
+    private Store getTrash() {
+        return stores.get(2);
     }
 }
