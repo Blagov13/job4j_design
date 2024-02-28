@@ -18,7 +18,11 @@ class XmlReportTest {
         DateTimeParser<Calendar> dateTimeParser = new ReportDateTimeParser();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
+        Employee worker1 = new Employee("Alex", now, now, 200);
+        Employee worker2 = new Employee("Gena", now, now, 300);
         store.add(worker);
+        store.add(worker1);
+        store.add(worker2);
         Report report = new XmlReport(store);
         String s = System.lineSeparator();
         StringBuilder expect = new StringBuilder()
@@ -28,6 +32,14 @@ class XmlReportTest {
                 .append(String.format("hired=\"%s\" ", dateTimeParser.parse(worker.getHired())))
                 .append(String.format("fired=\"%s\" ", dateTimeParser.parse(worker.getFired())))
                 .append(String.format("salary=\"%s\"/>", worker.getSalary())).append(s)
+                .append(String.format("<employee name=\"%s\" ", worker1.getName()))
+                .append(String.format("hired=\"%s\" ", dateTimeParser.parse(worker1.getHired())))
+                .append(String.format("fired=\"%s\" ", dateTimeParser.parse(worker1.getFired())))
+                .append(String.format("salary=\"%s\"/>", worker1.getSalary())).append(s)
+                .append(String.format("<employee name=\"%s\" ", worker2.getName()))
+                .append(String.format("hired=\"%s\" ", dateTimeParser.parse(worker2.getHired())))
+                .append(String.format("fired=\"%s\" ", dateTimeParser.parse(worker2.getFired())))
+                .append(String.format("salary=\"%s\"/>", worker2.getSalary())).append(s)
                 .append("</employees>").append(s);
         assertThat(report.generate(em -> true)).isEqualToIgnoringWhitespace(expect.toString());
     }
