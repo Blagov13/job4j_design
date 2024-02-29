@@ -21,21 +21,21 @@ class ParkingLotTest {
     }
 
     @Test
-    public void testParkCar_Success() {
+    public void testParkCarSuccess() {
         /*ѕровер€ем, что легковую машину можно успешно припарковать*/
         boolean isParked = parkingLot.parkVehicle(car);
         Assertions.assertTrue(isParked);
     }
 
     @Test
-    public void testParkTruck_Success() {
+    public void testParkTruckSuccess() {
         /*ѕровер€ем, что грузовик можно успешно припарковать на место дл€ грузовиков*/
         boolean isParked = parkingLot.parkVehicle(truck);
         Assertions.assertTrue(isParked);
     }
 
     @Test
-    public void testParkLargeTruck_Success() {
+    public void testParkLargeTruckSuccess() {
         /*ѕаркуем несколько легковых машин, чтобы проверить,
         что большой грузовик сможет припарковатьс€ на оставшиес€ местах дл€ легковых*/
         parkingLot.parkVehicle(car);
