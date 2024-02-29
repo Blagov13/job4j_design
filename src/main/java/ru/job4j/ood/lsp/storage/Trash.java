@@ -1,19 +1,10 @@
 package ru.job4j.ood.lsp.storage;
 
-import java.util.List;
+import java.time.LocalDate;
 
 public class Trash extends AbstractStore {
-    public Trash(List<Food> products) {
-        super(products);
-    }
-
     @Override
-    public void addProduct(Food food) {
-        products.add(food);
-    }
-
-    @Override
-    public List<Food> getProducts() {
-        return products;
+    public boolean supports(Food product) {
+        return product.getExpiryDate().isBefore(LocalDate.now());
     }
 }

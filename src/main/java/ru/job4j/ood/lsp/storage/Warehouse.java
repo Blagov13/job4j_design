@@ -1,19 +1,14 @@
 package ru.job4j.ood.lsp.storage;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Warehouse extends AbstractStore {
-    public Warehouse(List<Food> products) {
-        super(products);
-    }
-
     @Override
-    public void addProduct(Food food) {
-        products.add(food);
-    }
-
-    @Override
-    public List<Food> getProducts() {
-        return products;
+    public boolean supports(Food product) {
+        LocalDate currentDate = LocalDate.now();
+        long shelfLife = ChronoUnit.DAYS.between(product.getCreateDate(), product.getExpiryDate());
+        long expiredPeriod = ChronoUnit.DAYS.between(product.getExpiryDate(), currentDate);
+        return expiredPeriod < 0.25 * shelfLife;
     }
 }

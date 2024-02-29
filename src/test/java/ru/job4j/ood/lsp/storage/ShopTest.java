@@ -5,16 +5,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 class ShopTest {
     @Test
-    public void testAddProduct() {
-        Shop shop = new Shop(new ArrayList<>());
-        Food bread = new Food("Bread", LocalDate.now().plusDays(5), LocalDate.now(), 50, 0.05);
-        shop.addProduct(bread);
-        List<Food> products = shop.getProducts();
-        assertTrue(products.contains(bread));
+    public void whenProductAddWithDiscount() {
+        Shop shop = new Shop();
+        LocalDate expiryDate = LocalDate.now().plusDays(30);
+        Food product = new Food("Bread", LocalDate.now().minusDays(10), expiryDate, 80.0, 0.2);
+
+        boolean result = shop.supports(product);
+
+        assertTrue(result);
+        assertEquals(76.8, product.getPrice(), 0.01);
     }
 }

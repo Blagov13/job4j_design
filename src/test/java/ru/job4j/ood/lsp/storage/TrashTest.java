@@ -5,16 +5,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-class TrashTest {  @Test
-public void testAddProduct() {
-    Trash trash = new Trash(new ArrayList<>());
-    Food chicken = new Food("Chicken", LocalDate.now().minusDays(2),
-            LocalDate.now().minusDays(7), 200, 0.2);
-    trash.addProduct(chicken);
-    List<Food> products = trash.getProducts();
-    assertTrue(products.contains(chicken));
-}
+class TrashTest {
+    @Test
+    void testSupports() {
+        Trash trash = new Trash();
+        LocalDate currentDate = LocalDate.now();
+        Food milk = new Food("Milk", currentDate.minusDays(1),
+                currentDate.minusDays(10), 5.0, 0.1);
+
+        boolean result = trash.supports(milk);
+
+        assertTrue(result);
+    }
 }
