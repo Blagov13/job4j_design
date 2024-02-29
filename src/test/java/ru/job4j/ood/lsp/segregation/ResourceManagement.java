@@ -1,4 +1,4 @@
-package ru.job4j.ood.lsp.segregationPrinciple;
+package ru.job4j.ood.lsp.segregation;
 
 public interface ResourceManagement {
     /*Интерфейс содержит методы для работы и методы для управления рабочим местом.*/
