@@ -1,5 +1,6 @@
 package ru.job4j.ood.lsp.storage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControlQuality {
@@ -17,5 +18,13 @@ public class ControlQuality {
             }
         }
         throw new IllegalStateException("No store supports the product: " + product.getName());
+    }
+
+    public void resort() {
+        List<Food> allProducts = new ArrayList<>();
+        stores.forEach(store -> allProducts.addAll(store.getProducts()));
+        stores.forEach(Store::clearProducts);
+
+        allProducts.forEach(this::redistribute);
     }
 }

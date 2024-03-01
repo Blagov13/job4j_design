@@ -2,6 +2,7 @@ package ru.job4j.ood.lsp.storage;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 public class Shop extends AbstractStore {
     @Override
@@ -21,5 +22,10 @@ public class Shop extends AbstractStore {
         }
 
         return false;
+    }
+
+    @Override
+    public void clearProducts() {
+        products = new ArrayList<>();
     }
 }

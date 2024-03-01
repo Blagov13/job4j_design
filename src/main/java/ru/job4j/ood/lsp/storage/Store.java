@@ -8,4 +8,6 @@ public interface Store {
     boolean supports(Food product);
 
     List<Food> getProducts();
+
+    void clearProducts();
 }
