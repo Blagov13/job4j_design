@@ -5,7 +5,6 @@ public class ReportGenerator {
 
     public void generateReport() {
         dbConnection.openConnection();
-        // Генерация отчета
         dbConnection.closeConnection();
     }
 
