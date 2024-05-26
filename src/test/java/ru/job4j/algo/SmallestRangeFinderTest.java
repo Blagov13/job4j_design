@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class SmallestRangeFinderTest {
     @Test
-    public void whenFindSmallestRange_UniqueElements_ThenReturnsExpectedRange() {
+    public void whenFindSmallestRangeUniqueElementsThenReturnsExpectedRange() {
         int[] nums = {1, 3, 5, 7, 9};
         int k = 3;
         int[] expectedRange = {0, 2};
@@ -14,7 +14,7 @@ class SmallestRangeFinderTest {
     }
 
     @Test
-    public void whenFindSmallestRange_RepeatedElements_ThenReturnsExpectedRange() {
+    public void whenFindSmallestRangeRepeatedElementsThenReturnsExpectedRange() {
         int[] nums = {1, 2, 3, 3, 5, 6, 7};
         int k = 4;
         int[] expectedRange = {3, 6};
