@@ -12,26 +12,25 @@ public class Main {
             events.add(new Event(interval.end, false));
         }
         Collections.sort(events);
-        int currentOverlap = 0;
-        int maxOverlap = 0;
-        int start = -1;
-        int end = -1;
+        int maxOverlaps = 0;
+        int currentOverlaps = 0;
+        int maxOverlapStart = -1;
+        int maxOverlapEnd = -1;
         for (Event event : events) {
             if (event.isStart) {
-                currentOverlap++;
-                if (currentOverlap > maxOverlap) {
-                    maxOverlap = currentOverlap;
-                    start = event.time;
-                    end = event.time;
+                currentOverlaps++;
+                if (currentOverlaps > maxOverlaps) {
+                    maxOverlaps = currentOverlaps;
+                    maxOverlapStart = event.time;
                 }
             } else {
-                if (currentOverlap == maxOverlap) {
-                    end = event.time;
+                if (currentOverlaps == maxOverlaps) {
+                    maxOverlapEnd = event.time;
                 }
-                currentOverlap--;
+                currentOverlaps--;
             }
         }
-        return new int[]{start, end};
+        return new int[]{maxOverlapStart, maxOverlapEnd};
     }
 
     public static void main(String[] args) {
