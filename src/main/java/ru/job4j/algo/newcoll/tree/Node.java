@@ -34,4 +34,12 @@ public class Node<E> {
     public void setValue(E value) {
         this.value = value;
     }
+
+    public void addChild(Node<E> child) {
+        children.add(child);
+    }
+
+    public void removeChild(Node<E> child) {
+        children.remove(child);
+    }
 }
